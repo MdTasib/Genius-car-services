@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../../images/logo-black.png";
 
 const Header = () => {
 	return (
-		<nav className='navbar navbar-expand-lg navbar-light bg-light'>
-			<div className='container-fluid'>
-				<a class='navbar-brand' href='#'>
+		<nav className='navbar navbar-expand-lg navbar-light bg-light fixed-top'>
+			<div className='container'>
+				<Link className='navbar-brand' to='/'>
 					<img src={logo} alt='' height='24' />
-				</a>
+				</Link>
 				<button
 					className='navbar-toggler'
 					type='button'
@@ -21,22 +22,19 @@ const Header = () => {
 				<div className='collapse navbar-collapse' id='navbarNav'>
 					<ul className='navbar-nav ms-auto'>
 						<li className='nav-item'>
-							<a className='nav-link active' aria-current='page' href='#'>
+							<Link className='nav-link active' aria-current='page' to='/home'>
 								Home
-							</a>
+							</Link>
 						</li>
 						<li className='nav-item'>
-							<a className='nav-link' href='#'>
-								Features
-							</a>
+							<Link className='nav-link' to='about'>
+								About
+							</Link>
 						</li>
 						<li className='nav-item'>
-							<a className='nav-link' href='#'>
-								Pricing
-							</a>
-						</li>
-						<li className='nav-item'>
-							<a className='nav-link disabled'>Disabled</a>
+							<Link className='nav-link' to='login'>
+								Login
+							</Link>
 						</li>
 					</ul>
 				</div>

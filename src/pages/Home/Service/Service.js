@@ -1,14 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Service = ({ service }) => {
-	const { name, price, img, description } = service;
+	const { id, name, price, img, description } = service;
+	const navigate = useNavigate();
+
+	const handleDetails = id => {
+		navigate(`/service/${id}`);
+	};
+
 	return (
 		<div className='col-md-4'>
 			<img src={img} alt='' />
 			<h3>{name}</h3>
 			<p>Price : {price}</p>
 			<p>{description}</p>
-			<button>BOOK</button>
+			<button onClick={() => handleDetails(id)} className='btn btn-primary'>
+				BOOK
+			</button>
 		</div>
 	);
 };
