@@ -1,8 +1,26 @@
-import React from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import auth from "../../../firebase.init";
 import logo from "../../../images/logo-black.png";
 
 const Header = () => {
+	const [user, setUser] = useState({});
+
+	useEffect(() => {
+		onAuthStateChanged(auth, user => {
+			if (user) {
+				setUser(user);
+			} else {
+				setUser({});
+			}
+		});
+	}, []);
+
+	const handleLogOut = () => {
+		signOut(auth).then(() => {});
+	};
+
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light bg-light fixed-top'>
 			<div className='container'>
@@ -48,9 +66,15 @@ const Header = () => {
 							</Link>
 						</li>
 						<li className='nav-item'>
-							<Link className='nav-link' to='login'>
-								Login
-							</Link>
+							{user.uid ? (
+								<button onClick={handleLogOut} className='btn btn-primary'>
+									Log Out
+								</button>
+							) : (
+								<Link className='nav-link' to='login'>
+									Login
+								</Link>
+							)}
 						</li>
 					</ul>
 				</div>

@@ -1,16 +1,31 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "../../../firebase.init";
+import { AuthUser } from "../../../App";
 
 const Singup = () => {
 	const emailRef = useRef("");
 	const nameRef = useRef("");
 	const passwordRef = useRef("");
+	const navigate = useNavigate();
+	const [user, setUser] = useContext(AuthUser);
 
 	const handleSubmit = event => {
 		event.preventDefault();
+		const name = nameRef.current.value;
 		const email = emailRef.current.value;
 		const password = passwordRef.current.value;
-		console.log(email, password);
+
+		createUserWithEmailAndPassword(auth, email, password)
+			.then(result => {
+				const user = result.user;
+				if (user.uid) {
+					navigate("/home");
+				}
+				setUser(user);
+			})
+			.catch(error => console.log(error.message));
 	};
 
 	return (

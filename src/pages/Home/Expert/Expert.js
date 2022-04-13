@@ -5,10 +5,10 @@ const Expert = ({ expert }) => {
 
 	return (
 		<div className='col-md-4'>
-			<div class='card'>
-				<img src={img} class='card-img-top' alt='...' />
-				<div class='card-body'>
-					<h5 class='card-title'>{name}</h5>
+			<div className='card'>
+				<img src={img} className='card-img-top' alt='...' />
+				<div className='card-body'>
+					<h5 className='card-title'>{name}</h5>
 				</div>
 			</div>
 		</div>

@@ -1,16 +1,34 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useRef, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthUser } from "../../../App";
+import auth from "../../../firebase.init";
 
 const Login = () => {
 	const emailRef = useRef("");
 	const passwordRef = useRef("");
+	const navigate = useNavigate();
+	const [user, setUser] = useContext(AuthUser);
+	const location = useLocation();
+
+	let from = location.state?.from?.pathname || "/";
 
 	const handleSubmit = event => {
 		event.preventDefault();
 		const email = emailRef.current.value;
 		const password = passwordRef.current.value;
-		console.log(email, password);
+
+		signInWithEmailAndPassword(auth, email, password)
+			.then(result => {
+				const user = result.user;
+				setUser(user);
+			})
+			.catch(error => console.log(error.message));
 	};
+
+	if (user.uid) {
+		navigate(from, { replace: true });
+	}
 
 	return (
 		<div className='py-5 mt-5 w-50 m-auto'>
