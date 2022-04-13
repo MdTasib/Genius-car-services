@@ -14,7 +14,7 @@ const Login = () => {
 
 	return (
 		<div className='py-5 mt-5 w-50 m-auto'>
-			<h3 className='text-primary'>Login Page</h3>
+			<h3 className='text-primary'>Please Login</h3>
 			<form onSubmit={handleSubmit}>
 				<div className='mb-3'>
 					<label htmlFor='exampleInputEmail1' className='form-label'>
