@@ -18,7 +18,7 @@ const data = [
 
 const Experts = () => {
 	return (
-		<div className='container py-5'>
+		<div className='container py-5' id='experts'>
 			<h2 className='text-center text-primary'>Our Experts</h2>
 			<div className='row g-5'>
 				{data.map(expert => (
