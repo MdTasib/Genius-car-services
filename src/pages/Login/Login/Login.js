@@ -1,4 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+	sendPasswordResetEmail,
+	signInWithEmailAndPassword,
+} from "firebase/auth";
 import React, { useRef, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthUser } from "../../../App";
@@ -24,6 +27,13 @@ const Login = () => {
 				const user = result.user;
 				setUser(user);
 			})
+			.catch(error => console.log(error.message));
+	};
+
+	const handleForgetPassword = () => {
+		const email = emailRef.current.value;
+		sendPasswordResetEmail(auth, email)
+			.then(result => () => {})
 			.catch(error => console.log(error.message));
 	};
 
@@ -63,10 +73,14 @@ const Login = () => {
 				<p>
 					New Genius Car ? <Link to='/singup'>Please Register</Link>
 				</p>
-				<button type='submit' className='btn btn-primary'>
+				<button type='submit' className='btn btn-primary mb-2'>
 					Submit
 				</button>
+				<br />
 			</form>
+			<button onClick={handleForgetPassword} className='btn btn-danger'>
+				Forget Password
+			</button>
 			<SocialLogin />
 		</div>
 	);
