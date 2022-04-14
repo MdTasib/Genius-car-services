@@ -1,6 +1,6 @@
 import React, { useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import auth from "../../../firebase.init";
 import { AuthUser } from "../../../App";
 import SocialLogin from "../SocialLogin/SocialLogin";
@@ -12,19 +12,28 @@ const Singup = () => {
 	const navigate = useNavigate();
 	const [user, setUser] = useContext(AuthUser);
 
+	console.log("user from context api - ", user);
+
 	const handleSubmit = event => {
 		event.preventDefault();
-		const name = nameRef.current.value;
 		const email = emailRef.current.value;
 		const password = passwordRef.current.value;
 
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(result => {
 				const user = result.user;
-				if (user.uid) {
-					navigate("/home");
-				}
+				updateUserProfile();
 				setUser(user);
+				console.log("user from firebase - ", user);
+			})
+			.catch(error => console.log(error.message));
+	};
+
+	const updateUserProfile = () => {
+		const name = nameRef.current.value;
+		updateProfile(auth.currentUser, { displayName: name })
+			.then(() => {
+				console.log("user name set");
 			})
 			.catch(error => console.log(error.message));
 	};
