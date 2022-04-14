@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../../firebase.init";
 import { AuthUser } from "../../../App";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Singup = () => {
 	const emailRef = useRef("");
@@ -77,6 +78,7 @@ const Singup = () => {
 					Submit
 				</button>
 			</form>
+			<SocialLogin />
 		</div>
 	);
 };

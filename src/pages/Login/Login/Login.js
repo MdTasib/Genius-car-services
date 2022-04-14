@@ -3,6 +3,7 @@ import React, { useRef, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthUser } from "../../../App";
 import auth from "../../../firebase.init";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
 	const emailRef = useRef("");
@@ -66,6 +67,7 @@ const Login = () => {
 					Submit
 				</button>
 			</form>
+			<SocialLogin />
 		</div>
 	);
 };
