@@ -11,6 +11,8 @@ import Login from "./pages/Login/Login/Login";
 import Singup from "./pages/Login/Singup/Singup";
 import RequireAuth from "./pages/Login/RequireAuth/RequireAuth";
 import CheckOut from "./pages/CheckOut/CheckOut";
+import AddService from "./pages/AddService/AddService";
+import ManageService from "./pages/ManageService/ManageService";
 
 export const AuthUser = createContext();
 
@@ -24,6 +26,8 @@ function App() {
 					<Route path='/' element={<Home />} />
 					<Route path='/home' element={<Home />} />
 					<Route path='/about' element={<About />} />
+					<Route path='/addService' element={<AddService />} />
+					<Route path='/manage' element={<ManageService />} />
 					<Route path='/service/:serviceId' element={<ServiceDetails />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/singup' element={<Singup />} />
